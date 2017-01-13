@@ -58,6 +58,12 @@ public class Configuration implements ProxyConfig
     private Favicon favicon;
     private int compressionThreshold = 256;
 
+    // Dummy start
+    private boolean enableSocks5Proxy = false;
+    private String socks5ProxyAddress = "127.0.0.1";
+    private int socks5ProxyPort = 8080;
+    // Dummy end
+
     public void load()
     {
         ConfigurationAdapter adapter = ProxyServer.getInstance().getConfigurationAdapter();
@@ -74,6 +80,12 @@ public class Configuration implements ProxyConfig
                 ProxyServer.getInstance().getLogger().log( Level.WARNING, "Could not load server icon", ex );
             }
         }
+
+        // Dummy start
+        enableSocks5Proxy = adapter.getBoolean("socks5_proxy", enableSocks5Proxy);
+        socks5ProxyAddress = adapter.getString("socks5_address", socks5ProxyAddress);
+        socks5ProxyPort = adapter.getInt("socks5_port", socks5ProxyPort);
+        // Dummy end
 
         listeners = adapter.getListeners();
         timeout = adapter.getInt( "timeout", timeout );
